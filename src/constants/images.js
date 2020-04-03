@@ -4,28 +4,28 @@ const images = [
     src: "_yasinaydin.JPG",
     title: "foo",
     creator: "Yasin Aydin",
-    grade: "ungraded"
+    grade: "red"
   },
   {
     id: 2,
     src: "aCross_yasinaydin.JPG",
     title: "aCross",
     creator: "Yasin Aydin",
-    grade: "ungraded"
+    grade: "blue"
   },
   {
     id: 3,
     src: "final2_yasinaydin.JPG",
     title: "Final 2",
     creator: "Yasin Aydin",
-    grade: "ungraded"
+    grade: "yellow"
   },
   {
     id: 4,
     src: "final_yasinaydin.JPG",
     title: "Final",
     creator: "Yasin Aydin",
-    grade: "ungraded"
+    grade: "pink"
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ const images = [
     src: `Last Day_yasinaydin.JPG`,
     title: "Last Day",
     creator: "Yasin Aydin",
-    grade: "ungraded"
+    grade: "orange"
   }
 ];
 

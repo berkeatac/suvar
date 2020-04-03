@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "../../elements/Card/Card";
+import colors from "../../constants/colors";
 
-const RouteCard = () => {
+const RouteCard = props => {
   return (
     <Card color="beige">
       <div style={{ width: "200px", margin: "10px" }}>
@@ -11,11 +12,23 @@ const RouteCard = () => {
             margin: "10px auto",
             borderRadius: "4px"
           }}
-          src={require("../../assets/route_images/_yasinaydin.JPG")}
+          src={require(`../../assets/route_images/${props.imgUrl}`)}
           alt="placeholder"
         ></img>
-        <h2 style={{ textAlign: "center", margin: "3px" }}>routename</h2>
-        <h3 style={{ textAlign: "center", margin: "3px" }}>routesetter</h3>
+        <div
+          style={{
+            height: "10px",
+            backgroundColor: colors[`g_${props.color}`],
+            borderRadius: "6px",
+            marginBottom: "6px"
+          }}
+        />
+        <h2 style={{ textAlign: "center", margin: "3px" }}>
+          {props.routeName}
+        </h2>
+        <h5 style={{ textAlign: "center", margin: "3px" }}>
+          {props.routeSetter}
+        </h5>
       </div>
     </Card>
   );

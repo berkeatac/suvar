@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import Card from "../elements/Card/Card";
 import Header from "../components/Header/Header";
 import RouteCard from "../components/RouteCard/RouteCard";
+import images from "../constants/images";
+
 import "normalize.css";
 
 const App = () => {
@@ -18,27 +19,16 @@ const App = () => {
           justifyContent: "center"
         }}
       >
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
-        <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-          <RouteCard />
-        </div>
+        {images.map(element => (
+          <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
+            <RouteCard
+              imgUrl={element.src}
+              routeName={element.title}
+              routeSetter={element.creator}
+              color={element.grade}
+            />
+          </div>
+        ))}
       </div>
     </>
   );
