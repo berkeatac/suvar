@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import Header from "../components/Header/Header";
 import RouteCard from "../components/RouteCard/RouteCard";
+import CheckBox from "../elements/CheckBox/CheckBox";
 import images from "../constants/images";
 
 import "normalize.css";
@@ -11,6 +12,7 @@ const App = () => {
       <div style={{ marginBottom: "30px" }}>
         <Header></Header>
       </div>
+      <CheckBox></CheckBox>
       <div
         style={{
           display: "flex",
