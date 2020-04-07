@@ -1,0 +1,34 @@
+.wrapper {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 4fr;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-element {
+  display: block;
+  height: 100px;
+  background-color: aquamarine;
+  border: 5px solid red
+}
+
+.cards-content-wrapper {
+  grid-column: 2 / 3;
+}
+
+.cards-content {
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media only screen and (min-width: 1000px) {
+  .cards-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

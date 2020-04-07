@@ -5,32 +5,50 @@ import CheckBox from "../elements/CheckBox/CheckBox";
 import images from "../constants/images";
 
 import "normalize.css";
+import "./App.css"
 
 const App = () => {
+  const renderCards = (imgs) => {
+    imgs.map(element => (
+      <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
+        <RouteCard
+          imgUrl={element.src}
+          routeName={element.title}
+          routeSetter={element.creator}
+          color={element.grade}
+        />
+      </div>
+    ))
+  }
+
   return (
     <>
-      <div style={{ marginBottom: "30px" }}>
+      <div>
         <Header></Header>
       </div>
-      <CheckBox></CheckBox>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "center"
-        }}
-      >
-        {images.map(element => (
-          <div style={{ maxWidth: "500px", display: "inline", margin: "10px" }}>
-            <RouteCard
-              imgUrl={element.src}
-              routeName={element.title}
-              routeSetter={element.creator}
-              color={element.grade}
-            />
-          </div>
-        ))}
+      <div className="wrapper">
+        <div className="sidebar">
+            <div className="sidebar-element"></div>
+            <div className="sidebar-element"></div>
+            <div className="sidebar-element"></div>
+            <div className="sidebar-element"></div>
+        </div>
+        <div className="cards-content-wrapper">
+          <div className="cards-content" >
+          {
+          images.map(element => (
+            <div style={{ maxWidth: "300px", minWidth: "260px", margin: "10px auto" }}>
+              <RouteCard
+                imgUrl={element.src}
+                routeName={element.title}
+                routeSetter={element.creator}
+                color={element.grade}
+                />
+             </div>))
+          }
+        </div>
+        
+        </div>
       </div>
     </>
   );
