@@ -1,7 +1,7 @@
 .wrapper {
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 200px 4fr;
 }
 
 .sidebar {
@@ -23,12 +23,26 @@
 .cards-content {
   display: grid;
   justify-content: space-around;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media only screen and (min-width: 780px) {
+  .cards-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media only screen and (min-width: 1000px) {
   .cards-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .cards-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
