@@ -42,34 +42,34 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
+      <div className="sidebar">
+        <FilterItem
+          color="green"
+          selected={grades.green}
+          handleGradeChange={handleGradeChange}
+        />
+        <FilterItem
+          color="blue"
+          selected={grades.blue}
+          handleGradeChange={handleGradeChange}
+        />
+        <FilterItem
+          color="yellow"
+          selected={grades.yellow}
+          handleGradeChange={handleGradeChange}
+        />
+        <FilterItem
+          color="orange"
+          selected={grades.orange}
+          handleGradeChange={handleGradeChange}
+        />
+        <FilterItem
+          color="red"
+          selected={grades.red}
+          handleGradeChange={handleGradeChange}
+        />
+      </div>
       <div className="wrapper">
-        <div className="sidebar">
-          <FilterItem
-            color="green"
-            selected={grades.green}
-            handleGradeChange={handleGradeChange}
-          />
-          <FilterItem
-            color="blue"
-            selected={grades.blue}
-            handleGradeChange={handleGradeChange}
-          />
-          <FilterItem
-            color="yellow"
-            selected={grades.yellow}
-            handleGradeChange={handleGradeChange}
-          />
-          <FilterItem
-            color="orange"
-            selected={grades.orange}
-            handleGradeChange={handleGradeChange}
-          />
-          <FilterItem
-            color="red"
-            selected={grades.red}
-            handleGradeChange={handleGradeChange}
-          />
-        </div>
         <div className="cards-content-wrapper">
           <div className="cards-content">{renderCards(images)}</div>
         </div>

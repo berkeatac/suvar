@@ -12,9 +12,7 @@ const FilterItem = (props) => {
         opacity: `${props.selected ? 1 : 0.4}`,
       }}
       onClick={() => props.handleGradeChange(props.color)}
-    >
-      {/* <h3>{props.color}</h3> */}
-    </div>
+    ></div>
   );
 };
 
