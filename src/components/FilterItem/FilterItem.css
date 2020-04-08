@@ -1,0 +1,9 @@
+.filter-item {
+  display: flex;
+  height: 50px;
+  border: 5px solid;
+  border-radius: 10px;
+  margin-top: 3px;
+  justify-content: center;
+  align-items: center;
+}

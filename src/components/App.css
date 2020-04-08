@@ -13,7 +13,7 @@
   display: block;
   height: 100px;
   background-color: aquamarine;
-  border: 5px solid red
+  border: 5px solid red;
 }
 
 .cards-content-wrapper {
@@ -24,6 +24,12 @@
   display: grid;
   justify-content: space-around;
   grid-template-columns: repeat(1, 1fr);
+}
+
+.route-card-wrapper {
+  max-width: 300px;
+  min-width: 260px;
+  margin: 10px auto;
 }
 
 @media only screen and (min-width: 780px) {
