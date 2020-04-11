@@ -20,13 +20,12 @@ const App = () => {
 
   const handleGradeChange = (grade) => {
     setGrades({ ...grades, [grade]: !grades[grade] });
-    console.log(grades);
   };
 
   const renderCards = (imgs) => {
     imgs = imgs.filter((item) => grades[item.grade] === true);
     return imgs.map((element) => (
-      <div className="route-card-wrapper">
+      <div className="route-card-wrapper" key={element.title}>
         <RouteCard
           imgUrl={element.src}
           routeName={element.title}
