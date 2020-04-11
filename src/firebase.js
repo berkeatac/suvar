@@ -18,4 +18,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
 
+// const settings = { timestampsInSnapshots: true };
+// firestore.settings(settings); No longer needed so removed
+
 export default firebase;

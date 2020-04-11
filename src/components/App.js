@@ -5,7 +5,7 @@ import CheckBox from "../elements/CheckBox/CheckBox";
 import FilterItem from "../components/FilterItem/FilterItem";
 
 import images from "../constants/images";
-
+import { firestore } from "../firebase";
 import "normalize.css";
 import "./App.css";
 
@@ -17,6 +17,26 @@ const App = () => {
     orange: true,
     red: true,
   });
+
+  useEffect(() => {
+    // async function getSnapshot() {
+    //   const snapshot = await firestore.collection("routes").get();
+    //   console.log({ snapshot });
+    // }
+    getSnapshot("posts");
+  }, []);
+
+  const getSnapshot = async (collection) => {
+    const snapshot = await firestore.collection(collection).get();
+
+    snapshot.forEach((doc) => {
+      const id = doc.id;
+      const data = doc.data();
+      console.log(id, data);
+    });
+
+    return snapshot;
+  };
 
   const handleGradeChange = (grade) => {
     setGrades({ ...grades, [grade]: !grades[grade] });
