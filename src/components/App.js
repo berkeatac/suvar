@@ -24,12 +24,14 @@ const App = () => {
     red: true,
   });
 
+  const [routes, setRoutes] = useState([]);
+
   const user = useContext(UserContext);
 
   // let unsub;
 
   useEffect(() => {
-    getSnapshot("posts");
+    getSnapshot("routes");
     return () => {
       // unsub();
     };
@@ -37,9 +39,8 @@ const App = () => {
 
   const getSnapshot = async (collection) => {
     const snapshot = await firestore.collection(collection).get();
-    const posts = snapshot.docs.map(collectIdsAndDocs);
-    console.log(posts);
-    return snapshot;
+    setRoutes(snapshot.docs.map(collectIdsAndDocs));
+    console.log(snapshot.docs.map(collectIdsAndDocs));
   };
 
   // const subscribeTo = (collection) => {
@@ -65,9 +66,9 @@ const App = () => {
     return imgs.map((element) => (
       <div className="route-card-wrapper" key={element.title}>
         <RouteCard
-          imgUrl={element.src}
+          imgUrl={element.url}
           routeName={element.title}
-          routeSetter={element.creator}
+          routeSetter={element.setter}
           color={element.grade}
         />
       </div>
@@ -79,10 +80,6 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
-      {user ? user.displayName : `no user`}
-      <button onClick={user ? () => signOut() : () => signInWithGoogle()}>
-        {user ? "Sign Out" : "Sign In"}
-      </button>
       <Switch>
         <Route exact path="/">
           <div className="sidebar">
@@ -93,12 +90,16 @@ const App = () => {
           </div>
           <div className="wrapper">
             <div className="cards-content-wrapper">
-              <div className="cards-content">{renderCards(images)}</div>
+              <div className="cards-content">{renderCards(routes)}</div>
             </div>
           </div>
         </Route>
         <Route exact path="/post">
-          <PostRoute grades={grades} />
+          {user ? (
+            <PostRoute grades={grades} />
+          ) : (
+            "You should log in to post routes"
+          )}
         </Route>
       </Switch>
     </div>

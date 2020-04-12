@@ -1,20 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { firestore, storage } from "../../firebase";
+import { UserContext } from "../../context/UserProvider";
+
+import "./PostRoutes.css";
 
 const PostRoute = ({ grades }) => {
   const [title, setTitle] = useState("");
   const [grade, setGrade] = useState("green");
   const [routeImage, setRouteImage] = useState(null);
 
+  const user = useContext(UserContext);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log(title, grade, routeImage);
+    storage
+      .ref()
+      .child(title)
+      .put(routeImage)
+      .then((response) => {
+        response.ref.getDownloadURL().then((photoURL) => {
+          firestore.collection("routes").add({
+            title,
+            grade,
+            uid: user.uid,
+            url: photoURL,
+            setter: user.displayName,
+          });
+        });
+      });
   };
 
   const getURL = (img) => (img !== null ? URL.createObjectURL(img) : null);
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
+      <form
+        onSubmit={handleFormSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "450px",
+          margin: "10px auto",
+        }}
+      >
         <input
           type="text"
           name="title"
