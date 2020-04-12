@@ -5,9 +5,10 @@ import CheckBox from "../elements/CheckBox/CheckBox";
 import FilterItem from "../components/FilterItem/FilterItem";
 
 import images from "../constants/images";
-import { firestore } from "../firebase";
+import { firestore, signInWithGoogle } from "../firebase";
 import "normalize.css";
 import "./App.css";
+import { collectIdsAndDocs } from "../utilities";
 
 const App = () => {
   const [grades, setGrades] = useState({
@@ -18,24 +19,45 @@ const App = () => {
     red: true,
   });
 
+  let unsub;
+
   useEffect(() => {
-    // async function getSnapshot() {
-    //   const snapshot = await firestore.collection("routes").get();
-    //   console.log({ snapshot });
-    // }
-    getSnapshot("posts");
+    // getSnapshot("posts");
+    subscribeTo("posts");
+    // handleCreate({
+    //   content: "c",
+    //   title: "t",
+    //   user: { displayName: "d", uid: 13 },
+    // });
+
+    return () => {
+      unsubscribeFrom("posts");
+    };
   }, []);
 
   const getSnapshot = async (collection) => {
     const snapshot = await firestore.collection(collection).get();
-
-    snapshot.forEach((doc) => {
-      const id = doc.id;
-      const data = doc.data();
-      console.log(id, data);
-    });
-
+    const posts = snapshot.docs.map(collectIdsAndDocs);
+    console.log(posts);
     return snapshot;
+  };
+
+  const subscribeTo = (collection) => {
+    unsub = firestore.collection("posts").onSnapshot((snapshot) => {
+      const posts = snapshot.docs.map(collectIdsAndDocs);
+      console.log("subscribe", posts);
+    });
+  };
+
+  const unsubscribeFrom = (collection) => {
+    unsub();
+  };
+
+  const handleCreate = async (post) => {
+    const docRef = await firestore.collection("posts").add(post);
+    const doc = await docRef.get();
+
+    const newPost = collectIdsAndDocs(doc);
   };
 
   const handleGradeChange = (grade) => {
