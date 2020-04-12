@@ -3,12 +3,16 @@ import Header from "../components/Header/Header";
 import RouteCard from "../components/RouteCard/RouteCard";
 import CheckBox from "../elements/CheckBox/CheckBox";
 import FilterItem from "../components/FilterItem/FilterItem";
+import FilterItems from "../components/FilterItems/FilterItems";
+import PostRoute from "../components/PostRoute/PostRoute";
 
 import images from "../constants/images";
 import { firestore, signInWithGoogle } from "../firebase";
 import "normalize.css";
 import "./App.css";
 import { collectIdsAndDocs } from "../utilities";
+
+import { Switch, Route, Link } from "react-router-dom";
 
 const App = () => {
   const [grades, setGrades] = useState({
@@ -83,38 +87,24 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
-      <div className="sidebar">
-        <FilterItem
-          color="green"
-          selected={grades.green}
-          handleGradeChange={handleGradeChange}
-        />
-        <FilterItem
-          color="blue"
-          selected={grades.blue}
-          handleGradeChange={handleGradeChange}
-        />
-        <FilterItem
-          color="yellow"
-          selected={grades.yellow}
-          handleGradeChange={handleGradeChange}
-        />
-        <FilterItem
-          color="orange"
-          selected={grades.orange}
-          handleGradeChange={handleGradeChange}
-        />
-        <FilterItem
-          color="red"
-          selected={grades.red}
-          handleGradeChange={handleGradeChange}
-        />
-      </div>
-      <div className="wrapper">
-        <div className="cards-content-wrapper">
-          <div className="cards-content">{renderCards(images)}</div>
-        </div>
-      </div>
+      <Switch>
+        <Route exact path="/">
+          <div className="sidebar">
+            <FilterItems
+              grades={grades}
+              handleGradeChange={handleGradeChange}
+            />
+          </div>
+          <div className="wrapper">
+            <div className="cards-content-wrapper">
+              <div className="cards-content">{renderCards(images)}</div>
+            </div>
+          </div>
+        </Route>
+        <Route exact path="/post">
+          <PostRoute grades={grades} />
+        </Route>
+      </Switch>
     </div>
   );
 };
