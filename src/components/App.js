@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import RouteCard from "../components/RouteCard/RouteCard";
-import CheckBox from "../elements/CheckBox/CheckBox";
-import FilterItem from "../components/FilterItem/FilterItem";
+// import CheckBox from "../elements/CheckBox/CheckBox";
+// import FilterItem from "../components/FilterItem/FilterItem";
 import FilterItems from "../components/FilterItems/FilterItems";
 import PostRoute from "../components/PostRoute/PostRoute";
 
 import images from "../constants/images";
-import { firestore, signInWithGoogle } from "../firebase";
+import { firestore, signInWithGoogle, signOut } from "../firebase";
 import "normalize.css";
 import "./App.css";
 import { collectIdsAndDocs } from "../utilities";
+import { UserContext } from "../context/UserProvider";
 
 import { Switch, Route, Link } from "react-router-dom";
 
@@ -23,19 +24,14 @@ const App = () => {
     red: true,
   });
 
-  let unsub;
+  const user = useContext(UserContext);
+
+  // let unsub;
 
   useEffect(() => {
-    // getSnapshot("posts");
-    subscribeTo("posts");
-    // handleCreate({
-    //   content: "c",
-    //   title: "t",
-    //   user: { displayName: "d", uid: 13 },
-    // });
-
+    getSnapshot("posts");
     return () => {
-      unsubscribeFrom("posts");
+      // unsub();
     };
   }, []);
 
@@ -46,23 +42,19 @@ const App = () => {
     return snapshot;
   };
 
-  const subscribeTo = (collection) => {
-    unsub = firestore.collection("posts").onSnapshot((snapshot) => {
-      const posts = snapshot.docs.map(collectIdsAndDocs);
-      console.log("subscribe", posts);
-    });
-  };
+  // const subscribeTo = (collection) => {
+  //   unsub = firestore.collection("posts").onSnapshot((snapshot) => {
+  //     const posts = snapshot.docs.map(collectIdsAndDocs);
+  //     console.log("subscribe", posts);
+  //   });
+  // };
 
-  const unsubscribeFrom = (collection) => {
-    unsub();
-  };
+  // const handleCreate = async (post) => {
+  //   const docRef = await firestore.collection("posts").add(post);
+  //   const doc = await docRef.get();
 
-  const handleCreate = async (post) => {
-    const docRef = await firestore.collection("posts").add(post);
-    const doc = await docRef.get();
-
-    const newPost = collectIdsAndDocs(doc);
-  };
+  //   const newPost = collectIdsAndDocs(doc);
+  // };
 
   const handleGradeChange = (grade) => {
     setGrades({ ...grades, [grade]: !grades[grade] });
@@ -87,6 +79,10 @@ const App = () => {
       <div>
         <Header></Header>
       </div>
+      {user ? user.displayName : `no user`}
+      <button onClick={user ? () => signOut() : () => signInWithGoogle()}>
+        {user ? "Sign Out" : "Sign In"}
+      </button>
       <Switch>
         <Route exact path="/">
           <div className="sidebar">
