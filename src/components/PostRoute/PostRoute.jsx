@@ -16,38 +16,39 @@ const PostRoute = ({ grades }) => {
   const history = useHistory();
 
   const handleFormSubmit = (e) => {
-    setLoading(true);
     e.preventDefault();
-    const timestamp = Date.now();
-    console.log(title, grade, routeImage);
-    storage
-      .ref()
-      .child(title)
-      .put(timestamp)
-      .then((response) => {
-        response.ref.getDownloadURL().then((photoURL) => {
-          firestore
-            .collection("routes")
-            .add({
-              title,
-              grade,
-              uid: user.uid,
-              url: photoURL,
-              setter: user.displayName,
-              timestamp,
-            })
-            .then((docRef) => {
-              setLoading(false);
-              history.push("/");
-            });
+    if (routeImage && title) {
+      setLoading(true);
+      const timestamp = Date.now();
+      console.log(title, grade, routeImage);
+      storage
+        .ref()
+        .child(timestamp.toString())
+        .put(routeImage)
+        .then((response) => {
+          response.ref.getDownloadURL().then((photoURL) => {
+            firestore
+              .collection("routes")
+              .add({
+                title,
+                grade,
+                uid: user.uid,
+                url: photoURL,
+                setter: user.displayName,
+                timestamp,
+              })
+              .then((docRef) => {
+                history.push("/");
+              });
+          });
         });
-      });
+    }
   };
 
   const getURL = (img) => (img !== null ? URL.createObjectURL(img) : null);
 
   if (loading) {
-    return "Loading";
+    return "Loading.. Please wait";
   } else {
     return (
       <div>
