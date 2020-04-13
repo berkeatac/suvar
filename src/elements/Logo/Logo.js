@@ -11,7 +11,7 @@ const logo = (props) => {
   ];
   return (
     <Link to="/" style={{ textDecoration: "none" }}>
-      <img src={SudoskLogo} style={{ height: "60px" }}></img>
+      <img src={SudoskLogo} style={{ height: "40px" }}></img>
     </Link>
   );
 };

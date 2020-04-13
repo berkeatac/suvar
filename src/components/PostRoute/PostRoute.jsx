@@ -68,7 +68,7 @@ const PostRoute = ({ grades }) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            width: "450px",
+            width: "80vw",
             margin: "10px auto",
           }}
         >
