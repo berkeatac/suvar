@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React, { useState, useRef, useEffect } from "react";
 import Card from "../../elements/Card/Card";
 import colors from "../../constants/colors";
@@ -26,7 +27,10 @@ const RouteCard = (props) => {
   return (
     <Card color="beige">
       <div style={{ width: "200px", margin: "10px" }}>
-        <div
+        <a
+          href={props.imgUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             width: "100%",
             margin: "10px auto",
@@ -35,7 +39,6 @@ const RouteCard = (props) => {
           ref={imgRef}
           alt="placeholder"
         />
-        {img}
         <div
           style={{
             height: "10px",
