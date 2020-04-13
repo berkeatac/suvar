@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import classes from "./Logo.module.css";
+import SudoskLogo from "../../assets/logo.png";
 
 const logo = (props) => {
   let logoWithColorScheme = [
@@ -9,11 +10,9 @@ const logo = (props) => {
     props.colorScheme === "dark" ? classes.Dark : classes.Light,
   ];
   return (
-    <h1 className={logoWithColorScheme.join(" ")} onClick={props.clicked}>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        suvar
-      </Link>
-    </h1>
+    <Link to="/" style={{ textDecoration: "none" }}>
+      <img src={SudoskLogo} style={{ height: "60px" }}></img>
+    </Link>
   );
 };
 
