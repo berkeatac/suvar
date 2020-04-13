@@ -90,8 +90,8 @@ const PostRoute = ({ grades }) => {
             onChange={(e) => setRouteImage(e.target.files[0])}
           />
           <input className="create" type="submit" value="Create Post" />
+          <img src={getURL(routeImage)} style={{ width: "250px" }}></img>
         </form>
-        <img src={getURL(routeImage)} style={{ width: "100px" }}></img>
       </div>
     );
   }

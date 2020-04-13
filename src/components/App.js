@@ -6,7 +6,6 @@ import RouteCard from "../components/RouteCard/RouteCard";
 import FilterItems from "../components/FilterItems/FilterItems";
 import PostRoute from "../components/PostRoute/PostRoute";
 
-import images from "../constants/images";
 import { firestore, signInWithGoogle, signOut } from "../firebase";
 import "normalize.css";
 import "./App.css";
@@ -19,10 +18,11 @@ import { PulseLoader } from "react-spinners";
 const App = () => {
   const [grades, setGrades] = useState({
     green: true,
+    byellow: true,
     blue: true,
     yellow: true,
     orange: true,
-    red: true,
+    pink: true,
   });
   const [loading, setLoading] = useState(true);
 
@@ -48,12 +48,15 @@ const App = () => {
   };
 
   const subscribeTo = (collection) => {
-    unsub = firestore.collection(collection).onSnapshot((snapshot) => {
-      const posts = snapshot.docs.map(collectIdsAndDocs);
-      setRoutes(snapshot.docs.map(collectIdsAndDocs));
-      setLoading(!snapshot);
-      console.log("subscribe", posts);
-    });
+    unsub = firestore
+      .collection(collection)
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        const posts = snapshot.docs.map(collectIdsAndDocs);
+        setRoutes(snapshot.docs.map(collectIdsAndDocs));
+        setLoading(!snapshot);
+        console.log("subscribe", posts);
+      });
   };
 
   // const handleCreate = async (post) => {

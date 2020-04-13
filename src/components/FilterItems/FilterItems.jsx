@@ -11,6 +11,11 @@ const FilterItems = ({ grades, handleGradeChange }) => {
         selected={grades.green}
       />
       <FilterItem
+        color={"byellow"}
+        handleGradeChange={handleGradeChange}
+        selected={grades.byellow}
+      />
+      <FilterItem
         color={"blue"}
         handleGradeChange={handleGradeChange}
         selected={grades.blue}
@@ -26,9 +31,9 @@ const FilterItems = ({ grades, handleGradeChange }) => {
         selected={grades.orange}
       />
       <FilterItem
-        color={"red"}
+        color={"pink"}
         handleGradeChange={handleGradeChange}
-        selected={grades.red}
+        selected={grades.pink}
       />
     </>
   );
