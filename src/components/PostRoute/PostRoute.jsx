@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { firestore, storage } from "../../firebase";
 import { UserContext } from "../../context/UserProvider";
+import { PulseLoader } from "react-spinners";
 
 import "./PostRoutes.css";
 
@@ -48,7 +49,17 @@ const PostRoute = ({ grades }) => {
   const getURL = (img) => (img !== null ? URL.createObjectURL(img) : null);
 
   if (loading) {
-    return "Loading.. Please wait";
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "100px",
+        }}
+      >
+        <PulseLoader size={25} color={"#36D7B7"}></PulseLoader>
+      </div>
+    );
   } else {
     return (
       <div>

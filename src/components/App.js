@@ -14,6 +14,7 @@ import { collectIdsAndDocs } from "../utilities";
 import { UserContext } from "../context/UserProvider";
 
 import { Switch, Route, Link } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
 
 const App = () => {
   const [grades, setGrades] = useState({
@@ -100,7 +101,15 @@ const App = () => {
             />
           </div>
           {loading ? (
-            "Loading routes.."
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "100px",
+              }}
+            >
+              <PulseLoader size={25} color={"#36D7B7"}></PulseLoader>
+            </div>
           ) : (
             <div className="wrapper">
               <div className="cards-content-wrapper">
