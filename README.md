@@ -1,3 +1,5 @@
+![Usage Gif](https://media.giphy.com/media/S6IDIgEt8xFGuiaKof/giphy.gif)
+
 Routebook App created for SU climbing wall.
 
 Can filter the routes by grades using the bar at the top. 
